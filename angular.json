@@ -5,10 +5,16 @@
   "projects": {
     "cmail": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "prefix": "cmail",
+          "inlineStyle": true,
+          "spec": false      
+        }
+      },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "cmail",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
