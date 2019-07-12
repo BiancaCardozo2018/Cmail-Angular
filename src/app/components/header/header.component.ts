@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'cmail-header',
-    templateUrl: './header.component.html',
-    styleUrls: [
-        './header.component.css',
-        './header-search.css'
-    ]
+  selector: 'cmail-header',
+  templateUrl: './header.component.html',
+  styleUrls: [
+    './header.component.css',
+    './header-search.css'
+  ]
 })
 export class HeaderComponent {
 
-    menuTaAberto = false;
+  menuTaAberto = false;
 
-    toggleMenu(){
-        this.menuTaAberto = !this.menuTaAberto;
-        console.log(this.menuTaAberto);
-    }
-    
+  toggleMenu() {
+    this.menuTaAberto = !this.menuTaAberto;
+    console.log(this.menuTaAberto);
+  }
+
 }
