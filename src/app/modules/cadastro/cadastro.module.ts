@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CadastroComponent } from './cadastro.component';
 import { RouterModule } from '@angular/router';
 import { SharedComponentsModule } from 'src/app/components/shared-components.module';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [CadastroComponent],
@@ -11,8 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RouterModule,
-    SharedComponentsModule,
-    ReactiveFormsModule
+    SharedComponentsModule
   ]
 })
 export class CadastroModule { }
