@@ -14,8 +14,6 @@ export class FormFieldDirective {
     campo.placeholder = ' ';
     campo.classList.add('mdl-textfield__input');
 
-    console.log(elemento);
-
   }
 
 }
