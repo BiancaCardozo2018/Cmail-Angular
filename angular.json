@@ -36,6 +36,9 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/material/css/material-icons.css",
+              "src/assets/material/css/material.indigo-red.min.css",
+              "src/assets/material/css/roboto.css",
               "src/assets/css/errorMessages.css",
               "src/assets/css/globalFab.css",
               "src/assets/css/newEmail.css",
