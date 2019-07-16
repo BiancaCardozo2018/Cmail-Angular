@@ -46,7 +46,23 @@
           [validation]="formCadastro.get('avatar').invalid && formCadastro.get('avatar').touched"
           >
             <input required formControlName="avatar" type="text" name="avatar" cmailFormField>
-            <span class="mdl-textfield__error">Informar um avatar é obrigatório!</span>
+
+            <span *ngIf="formCadastro.get('avatar').errors?.required" class="mdl-textfield__error">
+              Informar um avatar é obrigatório!
+            </span>
+
+            <span *ngIf="formCadastro.get('avatar').errors?.urlInvalida" class="mdl-textfield__error">
+              Esta URL tem problemas, informe outra
+            </span>
+
+            <span *ngIf="formCadastro.get('avatar').status === 'PENDING'" class="mdl-textfield__error mdl-textfield__checking">
+              Verificando...
+            </span>
+
+            <span *ngIf="formCadastro.get('avatar').status === 'VALID'" class="mdl-textfield__error mdl-textfield__valid">
+              URL Válida
+            </span>
+
           </cmail-form-group>
 
           <cmail-form-group label="Telefone" idCampo="telefone"
