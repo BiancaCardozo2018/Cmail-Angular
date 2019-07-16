@@ -21,11 +21,7 @@ const rotasApp: Routes = [
 
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(rotasApp)
-  ]
-  ,exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forRoot(rotasApp)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}
