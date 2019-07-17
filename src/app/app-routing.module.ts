@@ -1,15 +1,6 @@
 import { Routes, RouterModule } from "@angular/router";
 import { NgModule } from '@angular/core';
 
-/* const rotasApp: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'login/:nome', component: LoginComponent },
-  { path: 'inbox', component: CaixaDeEntradaComponent },
-  { path: 'cadastro', component: CadastroComponent },
-  { path: '**', redirectTo: ''}
-] */
-
 const rotasApp: Routes = [
   { path: '', loadChildren: () => import(`./modules/login/login.module`).then(m => m.LoginModule)},
   { path: 'login', loadChildren: () => import(`./modules/login/login.module`).then(m => m.LoginModule)},
@@ -21,7 +12,11 @@ const rotasApp: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(rotasApp)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(rotasApp)
+  ]
+  ,exports: [
+    RouterModule
+  ]
 })
 export class AppRoutingModule {}

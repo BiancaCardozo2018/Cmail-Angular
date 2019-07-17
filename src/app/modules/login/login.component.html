@@ -7,20 +7,17 @@
         <h1 class="mdl-card__title-text">Bem vindos/as ao CMail!</h1>
       </header>
 
-      <form (ngSubmit)="handleLogin(formLogin)" #formLogin="ngForm" autocomplete="off" class="mdl-card__supporting-text">
-        <cmail-form-group label="Email" idCampo="email" [validation]="email.invalid && email.touched">
-          <input type="email" #email="ngModel" [(ngModel)]="login.email" name="email" cmailFormField required autofocus>
-          <span class="mdl-textfield__error" *ngIf="email.invalid">
-            Informar um email é obrigatório !
-          </span>
-        </cmail-form-group>
+      <form autocomplete="off" class="mdl-card__supporting-text" (ngSubmit)="handleLogin(formLogin)" #formLogin="ngForm">
 
-        <cmail-form-group label="Senha" idCampo="senha" [validation]="senha.invalid && senha.touched">
-          <input type="password" #senha="ngModel" [(ngModel)]="login.password" name="senha" cmailFormField required autofocus>
-          <span class="mdl-textfield__error" *ngIf="senha.invalid">
-            Informar uma senha é obrigatória !
-          </span>
-        </cmail-form-group>
+       <cmail-form-group idCampo="email" label="Email" [validation]="email.invalid && email.touched">
+         <input email required #email="ngModel" [(ngModel)]="login.email" type="email" name="email" cmailFormField>
+         <span class="mdl-textfield__error">Informar um email é obrigatório!</span>
+       </cmail-form-group>
+
+       <cmail-form-group idCampo="senha" label="Senha" [validation]="senha.invalid && senha.touched">
+         <input required type="password" name="senha" [(ngModel)]="login.password" #senha="ngModel" cmailFormField>
+         <span class="mdl-textfield__error">Informar uma senha é obrigatório!</span>
+       </cmail-form-group>
 
         <div class="mdl-card__actions mdl-card--border">
           <a routerLink="cadastro" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">

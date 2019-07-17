@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'cmail-login',
   templateUrl: './login.component.html',
-  styles: []
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -14,27 +14,34 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
 
   handleLogin(formLogin: NgForm){
 
-    if (formLogin.valid) {
-      this.httpClient
-        .post('http://localhost:3200/login', this.login)
-        .subscribe(
-          (response) => {
-            console.log(response);
-            console.log('deu certo');
-          },
-          (error) => {
-            console.log(error);
-            console.log('deu ruim');
-          }
-        )
+    if(formLogin.invalid){
+      formLogin.controls['email'].markAsTouched();
+      formLogin.controls['senha'].markAsTouched();
+      return
     }
+
+    this.http
+        .post('http://localhost:3200/login',this.login)
+        .subscribe(
+          (res: any) => {
+            console.log(res);
+            localStorage.setItem('cmail-token', res.token)
+          }
+          , erro => {
+            console.log(erro);
+
+          }
+        );
+
+
+
   }
 
 }
