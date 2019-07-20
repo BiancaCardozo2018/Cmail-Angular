@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpResponseBase } from '@angular/common/http';
-import { UserInput } from 'src/app/models/dto/user-input';
 import { Router } from '@angular/router';
 import { map, catchError } from 'rxjs/operators';
+import { UserService } from 'src/app/services/user.service';
+import { PageDataService } from 'src/app/services/page-data.service';
 
 @Component({
   selector: 'cmail-cadastro',
@@ -19,18 +20,22 @@ export class CadastroComponent implements OnInit {
 
   formCadastro = new FormGroup({
     nome: new FormControl('', Validators.required),
-    username: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    senha: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    avatar: new FormControl('', Validators.required, this.validaImagem.bind(this)),
+    username: new FormControl('', [Validators.required, Validators.minLength(2), Validators.email]),
+    senha: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern('^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$')])
+    ,avatar: new FormControl('', Validators.required, this.validaImagem.bind(this)),
     telefone: new FormControl('', [Validators.required, Validators.pattern('[0-9]{4}-?[0-9]{4}[0-9]?')]),
   })
 
   msgErro = '';
 
   constructor(private http: HttpClient
-              ,private roteador: Router) {}
+              ,private servico: UserService
+              ,private roteador: Router
+              ,private pageData: PageDataService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.pageData.atualizarTitulo('Cadastro')
+  }
 
   validaImagem(controle: FormControl){
 
@@ -61,17 +66,11 @@ export class CadastroComponent implements OnInit {
       return
     }
 
-    const dtoUser = new UserInput(this.formCadastro.value)
-
-    this.http
-        .post('http://localhost:3200/users',dtoUser)
+    this.servico
+        .cadastrar(this.formCadastro.value)
         .subscribe(
-         (userApi: any) => {
-            this.roteador.navigate(['login', userApi.username])
-          }
-         ,erro => {
-           this.msgErro = `${erro.statusText}: Oops algo errado aconteceu tente mais tarde. ${erro.status}`
-          }
+         user => this.roteador.navigate(['login', user.usuario])
+         ,erro => this.msgErro = `${erro.statusText}: Oops algo errado aconteceu tente mais tarde. ${erro.status}`
         );
 
   }

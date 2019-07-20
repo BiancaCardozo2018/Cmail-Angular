@@ -40,6 +40,9 @@
               <span>{{formCadastro.get('senha').errors?.minlength?.requiredLength}}</span>
               caracteres
             </span>
+            <span *ngIf="formCadastro.get('senha').errors?.pattern" class="mdl-textfield__error">
+              {{formCadastro.get('senha').errors?.pattern | json }}
+            </span>
           </cmail-form-group>
 
           <cmail-form-group label="Avatar" idCampo="avatar"

@@ -1,18 +1,22 @@
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-    <cmail-header></cmail-header>
+    <cmail-header (filtra)="getDadosFiltro($event)" ></cmail-header>
     <main class="mdl-layout__content">
         <div class="page-content">
 
+          <ul>
+            <cmail-list-item
+            *ngFor="let email of listaEmails | filtroEmails:termoDeFiltro"
+                [destinatario]="email.destinatario"
+                [assunto]="email.assunto"
+                [dataEnvio]="email.dataEnvio"
+                [conteudo]="email.conteudo"
+                [id]="email.id"
+                (vaiExcluir)="apagar($event)"
+                [title]="email.id"
+              ></cmail-list-item>
+            </ul>
+
             <div class="mdl-grid">
-
-                <ul>
-                    <li *ngFor="let email of listaEmails">
-                        {{email.destinatario}}
-                        {{email.assunto}}
-                        {{email.conteudo}}
-                    </li>
-                </ul>
-
                 <!-- Floating Multiline Textfield -->
                 <button (click)="toggleEmailForm()"
                     class="globalFab tooltip btn mdl-button mdl-js-button mdl-button--fab mdl-button--colored"
